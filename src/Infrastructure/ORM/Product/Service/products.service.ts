@@ -8,20 +8,23 @@ import { ProductsServiceInterface } from '@Domain/Product/products.service.inter
 export class ProductsService implements ProductsServiceInterface {
   constructor(
     @InjectRepository(Product)
-    private ProductsRepository: Repository<Product>,
+    private productsRepository: Repository<Product>,
   ) {}
 
-  findAll(): Promise<Product[]> {
-    return this.ProductsRepository.find({
-      relations: ['category', 'category.parent'],
+  findAll(relations: string[]): Promise<Product[]> {
+    return this.productsRepository.find({
+      relations,
     });
   }
 
-  findOne(id: string): Promise<Product | null> {
-    return this.ProductsRepository.findOneBy({ id });
+  findOne(id: string, relations: string[]): Promise<Product | null> {
+    return this.productsRepository.findOne({
+      where: { id },
+      relations,
+    });
   }
 
   async remove(id: number): Promise<void> {
-    await this.ProductsRepository.delete(id);
+    await this.productsRepository.delete(id);
   }
 }

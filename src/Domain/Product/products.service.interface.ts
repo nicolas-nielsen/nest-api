@@ -1,9 +1,9 @@
 import { Product } from './product.entity';
 
 export interface ProductsServiceInterface {
-  findAll(): Promise<Product[]>;
+  findAll(relations: string[]): Promise<Product[]>;
 
-  findOne(id: string): Promise<Product | null>;
+  findOne(id: string, relations: string[]): Promise<Product | null>;
 
   remove(id: number): Promise<void>;
 }
