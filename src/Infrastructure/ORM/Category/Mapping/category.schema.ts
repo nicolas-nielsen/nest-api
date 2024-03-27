@@ -25,11 +25,13 @@ export const CategorySchema = new EntitySchema<Category>({
     },
     createdAt: {
       name: 'created_at',
-      type: String,
+      type: 'timestamp with time zone',
+      createDate: true,
     },
     updatedAt: {
       name: 'updated_at',
-      type: String,
+      type: 'timestamp with time zone',
+      updateDate: true,
     },
   },
   relations: {
